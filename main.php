@@ -22,7 +22,7 @@ require_once
 require_once 'conexion.php';
 
 // 1. Definir la query
-$sql = 'SELECT u.nombre_user, c.nombre_color FROM users u JOIN colores c USING(id_color);';
+$sql = 'SELECT u.id_user, u.nombre_user, c.nombre_color FROM users u JOIN colores c USING(id_color);';
 
 // 2. Preparar la respuesta
 $respuesta = $pdo->prepare($sql);
@@ -74,10 +74,10 @@ unset($_SESSION['nombre_existe']);
                         <p class="color_adaptado">Usuario: <?= $usuario['nombre_user'] ?>, color: <?= substr($usuario['nombre_color'], 1)   ?></p>
                     </div>
                     <div>
-                        <a href="main.php?nombre=<?= $usuario['nombre_user'] ?>&color=<?= substr($usuario['nombre_color'], 1)   ?>">
+                        <a href="main.php?nombre=<?= $usuario['nombre_user'] ?>&color=<?= substr($usuario['nombre_color'], 1) ?>&id=<?= $usuario['id_user'] ?>">
                             <i class="bi bi-pencil-fill color_adaptado"></i>
                         </a>
-                        <a href=""><i class="bi bi-person-x-fill color_adaptado"></i></a>
+                        <a href="delete.php?id=<?= $usuario['id_user'] ?>"><i class="bi bi-person-x-fill color_adaptado"></i></a>
 
 
                     </div>
@@ -131,7 +131,6 @@ unset($_SESSION['nombre_existe']);
                             <label for="color_u">Color:</label>
                             <input type="color" id='color_u' name='color_u' 
                                 value="<?= '#'.$_GET['color'] ?>">
-
                         </div>
                     </div>
                     <div class="error_insert">
