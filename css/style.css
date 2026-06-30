@@ -1,6 +1,105 @@
 * {
-    margin: 0;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+:root {
+  --anchura: 1200px;
+}
+h1 {
+  font-size: 1.5rem;
+  text-align: center;
+  margin: 1rem 0;
+}
+
+h2 {
+  font-size: 1.2rem;
+}
+
+main {
+  width: var(--anchura);
+  margin: 1rem auto;
+  display: grid;
+  gap: 3rem;
+  grid-template-columns: 1fr 1fr;
+}
+
+form {
+  label {
+    display: block;
+  }
+  input {
+    padding: 1rem;
+    width: 100%;
+    margin: 1rem 0;
+    display: block;
+    height: 1.5rem;
+  }
+
+  input[type="color"] {
+    border-radius: 50%;
+    height: 2rem;
+    width: 2rem;
     padding: 0;
-    box-sizing: border-box;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    cursor: pointer;
+    background-color: transparent;
+  }
+
+  input[type="color"]::-webkit-color-swatch-wrapper {
+    padding:0;
+  }
+
+  
+}
+
+.error_insert {
+  height: 2rem;
+  color: red;
+  margin-bottom: 1rem;
+}
+
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
+
+    button {
+        padding: .5rem;
+        border-radius: 5px;
+    }
+
+    button[type='submit'] {
+        color: green;
+        border: 2px solid green;
+
+        &:hover {
+            color: white;
+            background-color: green;
+        }
+    }
+
+        button[type='reset'] {
+        color: darkred;
+        border: 2px solid darkred;
+
+        &:hover {
+            color: white;
+            background-color: darkred;
+        }
+    }
+}
+
+.div_insert {
+  display: grid;
+  grid-template-columns: 5fr 1fr;
+  gap: 1rem;
+}
+
+
+.user {
+  margin: 1rem 0;
+  border: 1px solid black;
+  padding: 1rem;
 }
