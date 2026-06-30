@@ -21,6 +21,7 @@ require_once
 
 require_once 'conexion.php';
 
+<<<<<<< HEAD
 // 1. Definir la query
 $sql = 'SELECT u.nombre_user, c.nombre_color FROM users u JOIN colores c USING(id_color);';
 
@@ -38,6 +39,17 @@ $resultado = $respuesta->fetchAll();
 
 unset($_SESSION['error_insert']);
 unset($_SESSION['nombre_invalido']);
+=======
+// Definir la query
+$sql = 'SELECT u.nombre_user, c.nombre_color FROM users u JOIN colores c USING(id_color);';
+
+// Preparar la respuesta
+$respuesta = $pdo->prepare($sql);
+
+// Realizar la petición
+$respuesta-> execute();
+
+>>>>>>> c28832e60446742cc550af9d8315aab86a456a1e
 
 ?>
 
@@ -58,12 +70,16 @@ unset($_SESSION['nombre_invalido']);
     <main>
         <section>
             <h2>Usuarios</h2>
+<<<<<<< HEAD
             <?php foreach($resultado as $usuario) : ?>
                 <div class="user" style="background-color: <?= $usuario['nombre_color'] ?>" ;>
                     <p>Usuario: <?= $usuario['nombre_user'] ?>, color: <?= $usuario['nombre_color'] ?></p>
                 </div>
 
             <?php endforeach; ?>
+=======
+
+>>>>>>> c28832e60446742cc550af9d8315aab86a456a1e
 
         </section>
                 <section>

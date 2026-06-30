@@ -22,7 +22,11 @@ main {
   width: var(--anchura);
   margin: 1rem auto;
   display: grid;
+<<<<<<< HEAD
   gap: 3rem;
+=======
+  gap: 1rem;
+>>>>>>> c28832e60446742cc550af9d8315aab86a456a1e
   grid-template-columns: 1fr 1fr;
 }
 
@@ -31,6 +35,7 @@ form {
     display: block;
   }
   input {
+<<<<<<< HEAD
     padding: 1rem;
     width: 100%;
     margin: 1rem 0;
@@ -49,11 +54,17 @@ form {
 
   input[type="color"]::-webkit-color-swatch-wrapper {
     padding:0;
+=======
+    padding: 0.5rem;
+    width: 100%;
+    margin: 1rem 0;
+>>>>>>> c28832e60446742cc550af9d8315aab86a456a1e
   }
 
   
 }
 
+<<<<<<< HEAD
 .error_insert {
   height: 2rem;
   color: red;
@@ -62,6 +73,9 @@ form {
 
 
 .buttons {
+=======
+form div:last-child {
+>>>>>>> c28832e60446742cc550af9d8315aab86a456a1e
     display: flex;
     justify-content: space-between;
 
@@ -90,6 +104,7 @@ form {
         }
     }
 }
+<<<<<<< HEAD
 
 .div_insert {
   display: grid;
@@ -103,3 +118,5 @@ form {
   border: 1px solid black;
   padding: 1rem;
 }
+=======
+>>>>>>> c28832e60446742cc550af9d8315aab86a456a1e
