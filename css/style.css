@@ -22,11 +22,7 @@ main {
   width: var(--anchura);
   margin: 1rem auto;
   display: grid;
-<<<<<<< HEAD
   gap: 3rem;
-=======
-  gap: 1rem;
->>>>>>> c28832e60446742cc550af9d8315aab86a456a1e
   grid-template-columns: 1fr 1fr;
 }
 
@@ -35,7 +31,6 @@ form {
     display: block;
   }
   input {
-<<<<<<< HEAD
     padding: 1rem;
     width: 100%;
     margin: 1rem 0;
@@ -54,17 +49,11 @@ form {
 
   input[type="color"]::-webkit-color-swatch-wrapper {
     padding:0;
-=======
-    padding: 0.5rem;
-    width: 100%;
-    margin: 1rem 0;
->>>>>>> c28832e60446742cc550af9d8315aab86a456a1e
   }
 
   
 }
 
-<<<<<<< HEAD
 .error_insert {
   height: 2rem;
   color: red;
@@ -73,9 +62,6 @@ form {
 
 
 .buttons {
-=======
-form div:last-child {
->>>>>>> c28832e60446742cc550af9d8315aab86a456a1e
     display: flex;
     justify-content: space-between;
 
@@ -104,9 +90,8 @@ form div:last-child {
         }
     }
 }
-<<<<<<< HEAD
 
-.div_insert {
+.div_insert, .div_update {
   display: grid;
   grid-template-columns: 5fr 1fr;
   gap: 1rem;
@@ -117,6 +102,18 @@ form div:last-child {
   margin: 1rem 0;
   border: 1px solid black;
   padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  a {
+    color: inherit;
+    font-size: 1rem;
+  }
 }
-=======
->>>>>>> c28832e60446742cc550af9d8315aab86a456a1e
+
+.color_adaptado {
+  color: #fff;
+  mix-blend-mode: difference;
+
+}
