@@ -117,3 +117,9 @@ form {
   mix-blend-mode: difference;
 
 }
+
+.mensaje {
+  color: red;
+  text-align: center;
+  font-size: 1.2rem;
+}

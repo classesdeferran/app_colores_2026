@@ -4,15 +4,18 @@ session_start();
 $error_insert = $_SESSION['error_insert'] ?? '';
 $nombre_invalido = $_SESSION['nombre_invalido'] ?? '';
 $nombre_existe = $_SESSION['nombre_existe'] ?? false;
+$cambio_bd = $_SESSION['cambio_bd'] ?? false;
+$insert_user = $_SESSION['old_user'] ?? '';
+$insert_color = $_SESSION['old_color'] ?? '#FFF';
+
+// token CSRF
+$_SESSION['session_token'] = bin2hex(random_bytes(64));
 
 // echo "error ".$error_insert;
 // echo "<br>";
 
-
-
-
-
 /*
+Formas de importar ficheros en PHP
 include
 include_once
 require
@@ -32,6 +35,7 @@ $respuesta->execute();
 
 // 4. Recuperar los datos de la consulta
 $resultado = $respuesta->fetchAll();
+// $resultado es un array que contiene arrays asociativos que son las filas de la tabla
 
 // print_r($resultado);
 
@@ -39,7 +43,9 @@ $resultado = $respuesta->fetchAll();
 unset($_SESSION['error_insert']);
 unset($_SESSION['nombre_invalido']);
 unset($_SESSION['nombre_existe']);
-
+unset($_SESSION['cambio_bd']);
+unset($_SESSION['old_user']);
+unset($_SESSION['old_color']);
 
 
 ?>
@@ -63,6 +69,11 @@ unset($_SESSION['nombre_existe']);
 
     <header>
         <h1>¿Cuál es tu color preferido?</h1>
+        <?php if ($cambio_bd) : ?>
+            <p class="mensaje">
+                ATENCIÓN : se han producido cambios en la base de datos
+            </p>
+        <?php endif; ?>
     </header>
     <main>
         <section>
@@ -90,15 +101,24 @@ unset($_SESSION['nombre_existe']);
             <section>
                 <h2>Dinos tu color preferido</h2>
                 <form action="insert.php" method="post">
+                    <input type="hidden" name="count_users" value="<?= count($resultado) ?>">
+                    <input type="hidden" name="session_token" value="<?= "AA". $_SESSION['session_token'] ?>">
+
+                    <div style="display:none">
+                        <label for="user-name"></label>
+                        <input type="text" id="user-name" name="user-name">
+                    </div>
+
                     <div class="div_insert">
                         <div>
                             <label for="nombre_i">Nombre:</label>
                             <input type="text" id='nombre_i' name='nombre_i'
-                                value=<?= $nombre_invalido ?>>
+                                value="<?= $insert_user ?? $nombre_invalido ?>">
                         </div>
                         <div>
                             <label for="color_i">Color:</label>
-                            <input type="color" id='color_i' name='color_i'>
+                            <input type="color" id='color_i' name='color_i'
+                                value='<?= $insert_color ?>'>
                         </div>
                     </div>
                     <div class="error_insert">
@@ -129,8 +149,8 @@ unset($_SESSION['nombre_existe']);
                         </div>
                         <div>
                             <label for="color_u">Color:</label>
-                            <input type="color" id='color_u' name='color_u' 
-                                value="<?= '#'.$_GET['color'] ?>">
+                            <input type="color" id='color_u' name='color_u'
+                                value="<?= '#' . $_GET['color'] ?>">
                         </div>
                     </div>
                     <div class="error_insert">
@@ -154,3 +174,8 @@ unset($_SESSION['nombre_existe']);
 </body>
 
 </html>
+
+<?php
+
+$pdo = null;
+session_destroy();

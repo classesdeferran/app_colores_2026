@@ -9,9 +9,48 @@ if (!$_POST) {
     exit();
 }
 
-// print_r($_POST);
+// Verificación del Honeypot (señuelo)
+if (!empty($_POST['user-name'])) {
+    echo "Solicitud recibida";
+    http_response_code(200);
+    header('Location: main.php');
+    exit();
+}
+
+// Verificación del session-token
+if (!isset($_POST['session_token'])) {
+    header('Location: main.php');
+    exit();
+}
+
+if (!hash_equals($_SESSION['session_token'], $_POST['session_token'])) {
+    // echo "token falsificado";
+    header('Location: main.php');
+    exit();
+}
+
+
+$select_count = "SELECT COUNT(*) as count_users FROM users";
+$count_users = $pdo->prepare($select_count);
+$count_users->execute();
+$count_users = $count_users->fetch();
+// $count_users es un array asociativo con una única columna: count_users
+
 
 $nombre_usuario = trim($_POST['nombre_i']);
+
+if ($count_users['count_users'] != $_POST['count_users']) {
+    // Si ha cambiado la cantidad de usuarios no realizamos 
+    // el insert, pero advertimos al usuario
+    $_SESSION['cambio_bd'] = true;
+    $_SESSION['old_user'] = $nombre_usuario;
+    $_SESSION['old_color'] = $_POST['color_i'];
+    header('Location: main.php');
+    exit();
+}
+
+// print_r($_POST);
+
 
 $patron = '/^[ \p{L}0-9]+$/u';
 
@@ -88,5 +127,6 @@ try {
     echo "Error -> " . $err->getMessage();
 }
 
+$pdo = null;
 session_destroy();
 header('Location: main.php');
