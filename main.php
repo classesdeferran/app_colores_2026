@@ -2,6 +2,8 @@
 
 session_start();
 $error_insert = $_SESSION['error_insert'] ?? '';
+unset($_SESSION['error_insert']);
+
 $nombre_invalido = $_SESSION['nombre_invalido'] ?? '';
 $nombre_existe = $_SESSION['nombre_existe'] ?? false;
 $cambio_bd = $_SESSION['cambio_bd'] ?? false;
@@ -9,8 +11,17 @@ $insert_user = $_SESSION['old_user'] ?? '';
 $insert_color = $_SESSION['old_color'] ?? '#FFFFFF';
 $delete_id = $_SESSION['delete_id'] ?? '';
 
+$mostrar_toast = $_SESSION['mostrar_toast'] ?? false;
+unset($_SESSION['mostrar_toast']);
+
+$mensaje = $_SESSION['mensaje'] ?? '';
+unset($_SESSION['mensaje']);
+
 // token CSRF
-$_SESSION['session_token'] = bin2hex(random_bytes(64));
+if (empty($_SESSION['session_token'])) {
+    $_SESSION['session_token'] = bin2hex(random_bytes(64));
+}
+
 
 
 
@@ -38,7 +49,7 @@ $resultado = $respuesta->fetchAll();
 // $resultado es un array que contiene arrays asociativos que son las filas de la tabla
 
 
-unset($_SESSION['error_insert']);
+
 unset($_SESSION['nombre_invalido']);
 unset($_SESSION['nombre_existe']);
 unset($_SESSION['cambio_bd']);
@@ -202,6 +213,26 @@ unset($_SESSION['delete_dialog'])
             <button id="delete_si" type="button">Eliminar</button>
         </div>
     </dialog>
+
+
+    <?php if ($mostrar_toast) : ?>
+
+        <div id="toast">
+            <p><?= $mensaje ?></p>
+        </div>
+
+        <script>
+            // Mostrar el div anterior 3 segundos
+            setTimeout( () => {
+                const toast = document.getElementById('toast')
+                if(toast) {
+                    toast.style.transition = "opacity 1000ms linear"
+                    toast.style.opacity = "0"
+                    setTimeout(()=> toast.remove(), 1000)
+                }
+            }, 3000)
+        </script>
+    <?php endif; ?>
 
 </body>
 

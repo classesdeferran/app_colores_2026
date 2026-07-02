@@ -148,3 +148,17 @@ form {
 #dialog_delete {
   margin: auto;
 }
+
+#toast {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  background-color: darkgreen;
+  color: white;
+  padding: 15px 25px;
+  border-radius: 5px;
+  font-size: 1.2rem;
+  box-shadow: 0 4px 6px #c0c0c088; 
+  z-index: 10;
+  
+}
