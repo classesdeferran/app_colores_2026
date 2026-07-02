@@ -120,7 +120,7 @@ try {
     $insert_user = 'INSERT INTO users(nombre_user, id_color) VALUES(:nombre_user, :id_color)';
     $insert = $pdo->prepare($insert_user);
     $insert->execute([
-        'id_color' => $id_color,
+        ':id_color' => $id_color,
         ':nombre_user' => $nombre_usuario
     ]);
 } catch (PDOException $err) {

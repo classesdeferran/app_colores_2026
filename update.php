@@ -1,5 +1,8 @@
 <?php
 
+
+echo "Soy UPDATE";
+
 // Resolver la actualización de los datos
 
 // Requisitos:
